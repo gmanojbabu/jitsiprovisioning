@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Jitsi Provisioning Plugin Readme</title>
+    <style type="text/css">
+        BODY {
+            font-size : 100%;
+        }
+        BODY, TD, TH {
+            font-family : tahoma, verdana, arial, helvetica, sans-serif;
+            font-size : 0.8em;
+        }
+        H2 {
+             font-size : 10pt;
+             font-weight : bold;
+        }
+        A:hover {
+            text-decoration : none;
+        }
+        H1 {
+            font-family : tahoma, arial, helvetica, sans-serif;
+            font-size : 1.4em;
+            font-weight: bold;
+            border-bottom : 1px #ccc solid;
+            padding-bottom : 2px;
+        }
+
+        TT {
+            font-family : courier new;
+            font-weight : bold;
+            color : #060;
+        }
+        PRE {
+            font-family : courier new;
+            font-size : 100%;
+        }
+        #datatable TH {
+            color : #fff;
+            background-color : #2A448C;
+            text-align : left;
+        }
+        #datatable TD {
+            background-color : #FAF6EF;
+        }
+        #datatable .name {
+            background-color : #DCE2F5;
+        }
+    </style>
+</head>
+<body>
+
+<h1>
+Jitsi Provisioning Plugin Readme
+</h1>
+
+<h2>Overview</h2>
+
+<p>
+	The Jitsi Provisioning Plugin provides the ability to authenticate users and provision the Jitsi client according to the Enterprise Needs. Provisioning is the feature that allows network and provider administrators to remotely configure Jitsi instances that they are responsible for.
+	Jitsi’s provisioning module uses http. This means that, based on a few parameters like an IP or a mac layer address, or a user name and a password, this Plugin can feed to a freshly installed Jitsi all the details that it needs in order to start making calls, downloading updates or configure codec preferences.
+	
+</p>
+
+<h2>Installation</h2>
+
+<p>Copy jitsiprovisioning.jar into the plugins directory of your Openfire server. The
+plugin will then be automatically deployed. To upgrade to a new version, copy the new
+jitsiprovisioning.jar file over the existing file.</p>
+
+<h2>Configuration</h2>
+
+Access to the service is restricted with a "secret" that can be viewed and 
+set from the User Service page in the Openfire admin console.  This page is
+located on the admin console under "Server" and then "Server Settings".
+This should really only be considered weak security. The plugin was initially written with the assumption that http access to the Openfire service was
+only available to trusted machines. In the case of the plugin's author, a web application running on the same server as 
+Openfire makes the request.
+
+<h2>Using the Plugin</h2>
+
+To authenticate users and get the Jitsi provisioning details, submit HTTP/HTTPS requests to the jitsiprovisioning provisioning service. 
+A provisioning service is an HTTP or HTTPS URL optionally followed by several parameters. The URI would most often point to a provisioning server-side script. Please note that we strongly recommend you only use HTTPS unless you have very good reasons not to. Provisioning POST requests generally contain sensitive information like passwords and you definitely don’t want that being sent in clear text.
+
+The service address is [hostname]plugins/jitsiProvisioning/provision. For example,
+if your server name is "example.com", the URL is http://example.com/plugins/jitsiProvisioning/provision/?user=${username}&password=${password}&secret=bigsecret<p>
+
+<h2>Provisioning URI and parameters</h2>
+
+	The easiest way to have Jitsi connect to a provisioning server is to configure the provisioning URL in its configuration form. Jitsi also supports automatic provisioning discovery via DHCP and Bonjour. To do so, go to options => advanced => provisioning and check “Enable provisioning” (if not already checked), then select “Manually specify provisioning URI” and enter a URI.
+
+
+<p><b>Sample HTML</b><p>
+
+The following example athenticates user xyx and on success server returns provisioning data
+
+<ul>
+<form>
+<textarea cols=65 rows=3 wrap=virtual>
+http://example.com:9090/plugins/jitsiProvisioning/provisioning/?user=xyz&password=xyz&secret=bigsecret
+</textarea>
+</form>
+</ul>
+
+<br><br>
+* When sending double characters (Chinese/Japanese/Korean etc) you should URLEncode the string as utf8.<br> 
+In Java this is done like this<br> 
+URLEncoder.encode(username, "UTF-8"));
+<br>If the strings are encoded incorrectly, double byte characters will look garbeled in the Admin Console.
+
+
+<h2>Server Reply</h2>
+
+The server will reply to all User Service requests with an plain/text. 
+If the request was processed successfully the return will be a provisioning text.
+If the request was unsuccessful, the response will be 401 and plain/text with error message.
+<p>
+
+
+<div id="datatable">
+<table cellpadding="3" cellspacing="1" border="0" width="700">
+<tr>
+    <th >Error String 401 response</th><th>Description</th>
+</tr>
+<tr>
+    <td class="name">ConnectionException</td>
+    <td>Unable to connect to the Database/LDAP to authenticate the user</td>
+</tr>
+<tr>
+    <td class="name">InternalUnauthenticatedException</td>
+    <td>Internal authentication error</td>
+</tr>
+<tr>
+    <td class="name">UnauthorizedException</td>
+    <td>Invalid Username/Password. 
+    </td>
+</tr>
+<tr>
+    <td class="name">RequestNotAuthorised</td>
+    <td>The supplied secret does not match the secret specified in the Admin Console or the requester is not a valid IP address.</td>
+</tr>
+</table><p>
+</body>
+</html>

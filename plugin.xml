@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin>
+    <class>org.jivesoftware.openfire.plugin.JitsiProvisioningPlugin</class>
+    <name>Jitsi Provisioning</name>
+    <description>Allows Jitsi to authenticate users and provision the Client specific the Enterprise requirements via HTTP requests.</description>
+    <author>Manoj Babu</author>
+    <version>1.0</version>
+    <date>05/27/2013</date>
+    <minServerVersion>3.5.1</minServerVersion>
+    
+    <adminconsole>		
+        <tab id="tab-server">
+            <sidebar id="sidebar-server-settings">
+                <item id="jitsi-provisioning" name="Jitsi Provisioning" url="jitsi-provisioning.jsp"
+                     description="Click to manage the service that Jitsi client to authenticate and provision the client according to the Enterprise needs" />
+            </sidebar>
+        </tab>
+    </adminconsole>
+
+</plugin>
