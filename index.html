@@ -31,7 +31,8 @@
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
       <section id="main_content" class="inner">
-        <h2>Overview</h2>
+        <h2>
+<a name="overview" class="anchor" href="#overview"><span class="octicon octicon-link"></span></a>Overview</h2>
 
 <p>
     The Jitsi Provisioning Plugin for Openfire server provides the ability to authenticate users and provision the Jitsi client according to the Enterprise Needs. Provisioning is the feature that allows network and provider administrators to remotely configure Jitsi instances that they are responsible for.
@@ -39,13 +40,15 @@
     
 </p>
 
-<h2>Installation</h2>
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
 
 <p>Copy jitsiprovisioning.jar into the plugins directory of your Openfire server. The
 plugin will then be automatically deployed. To upgrade to a new version, copy the new
 jitsiprovisioning.jar file over the existing file.</p>
 
-<h2>Configuration</h2>
+<h2>
+<a name="configuration" class="anchor" href="#configuration"><span class="octicon octicon-link"></span></a>Configuration</h2>
 
 Access to the service is restricted with a "secret" that can be viewed and 
 set from the User Service page in the Openfire admin console.  This page is
@@ -54,7 +57,8 @@ This should really only be considered weak security. The plugin was initially wr
 only available to trusted machines. In the case of the plugin's author, a web application running on the same server as 
 Openfire makes the request.
 
-<h2>Using the Plugin</h2>
+<h2>
+<a name="using-the-plugin" class="anchor" href="#using-the-plugin"><span class="octicon octicon-link"></span></a>Using the Plugin</h2>
 
 To authenticate users and get the Jitsi provisioning details, submit HTTP/HTTPS requests to the jitsiprovisioning provisioning service. 
 A provisioning service is an HTTP or HTTPS URL optionally followed by several parameters. The URI would most often point to a provisioning server-side script. Please note that we strongly recommend you only use HTTPS unless you have very good reasons not to. Provisioning POST requests generally contain sensitive information like passwords and you definitely don’t want that being sent in clear text.
@@ -62,7 +66,8 @@ A provisioning service is an HTTP or HTTPS URL optionally followed by several pa
 The service address is [hostname]plugins/jitsiProvisioning/provision. For example,
 if your server name is "example.com", the URL is http://example.com/plugins/jitsiProvisioning/provision/?user=${username}&amp;password=${password}&amp;secret=bigsecret<p>
 
-</p><h2>Provisioning URI and parameters</h2>
+</p><h2>
+<a name="provisioning-uri-and-parameters" class="anchor" href="#provisioning-uri-and-parameters"><span class="octicon octicon-link"></span></a>Provisioning URI and parameters</h2>
 <p>
     The easiest way to have Jitsi connect to a provisioning server is to configure the provisioning URL in its configuration form. Jitsi also supports automatic provisioning discovery via DHCP and Bonjour. To do so, go to options =&gt; advanced =&gt; provisioning and check “Enable provisioning” (if not already checked), then select “Manually specify provisioning URI” and enter a URI.</p><p>
 
@@ -84,7 +89,8 @@ URLEncoder.encode(username, "UTF-8"));
 <br>If the strings are encoded incorrectly, double byte characters will look garbeled in the Admin Console.
 
 
-<h2>Server Reply</h2>
+<h2>
+<a name="server-reply" class="anchor" href="#server-reply"><span class="octicon octicon-link"></span></a>Server Reply</h2>
 
 The server will reply to all User Service requests with an plain/text. 
 If the request was processed successfully the return will be a provisioning text.
@@ -120,7 +126,8 @@ If the request was unsuccessful, the response will be 401 and plain/text with er
 </p>
 <p>
 </p>
-<h2>References</h2>
+<h2>
+<a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h2>
 <a href="https://jitsi.org/Documentation/Provisioning">Click here to know more about Jitsi Provisioning</a>
 <br><a href="http://www.igniterealtime.org/projects/openfire/">Click here to know more about Openfire server</a>
 </div>
